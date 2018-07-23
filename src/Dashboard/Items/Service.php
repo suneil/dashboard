@@ -9,6 +9,10 @@ use Zend\Hydrator\ClassMethods as Hydrator;
 
 /**
  * Class Service
+ *
+ * Abstraction for working with items. Uses repositories as
+ * the actual service to work with data
+ *
  * @package Dashboard\Items
  */
 class Service
@@ -19,9 +23,12 @@ class Service
     /** @var ExtendedPdo  */
     protected $db;
 
-    public function __construct(ExtendedPdo $db, LoggerInterface $logger)
+    /** @var DatabaseRepository */
+    protected $repository;
+
+    public function __construct(DatabaseRepository $repository, LoggerInterface $logger)
     {
-        $this->db = $db;
+        $this->repository = $repository;
         $this->logger = $logger;
     }
 
@@ -36,11 +43,12 @@ class Service
 
         $query = "SELECT * FROM item";
 
-        $results = $this->db->fetchAll($query);
+        $results = $this->repository->getAllItems();
 
         if (empty($results)) {
             return $items;
         }
+
         $hydrator = new Hydrator();
 
         foreach ($results as $result) {
@@ -60,13 +68,11 @@ class Service
 
         $item = new Item();
 
-        $query = "SELECT * FROM item WHERE id = ?";
-
-        $result = $this->db->fetchOne($query, [$id]);
+        $data = $this->repository->getItem($id);
 
         $hydrator = new Hydrator();
 
-        $item = $hydrator->hydrate($result, $item);
+        $item = $hydrator->hydrate($data, $item);
 
         return $item;
     }

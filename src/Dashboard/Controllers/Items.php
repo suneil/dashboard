@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Dashboard\Controllers;
 
+use Dashboard\Items\DatabaseRepository;
 use Dashboard\Items\Service;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -21,7 +22,8 @@ class Items extends AbstractController
      */
     public function item(RequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
-        $itemService = new Service($this->container->db, $this->container->logger);
+        $repo = new DatabaseRepository($this->container->db, $this->container->logger);
+        $itemService = new Service($repo, $this->container->logger);
 
         $itemId = intval($args['id']);
 
