@@ -1,0 +1,16 @@
+{% extends "base.twig" %}
+
+{% block title %}Item {{ parent() }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12 dashboard-main">
+            <h2 class="dashboard-post-title">{{ item.GetName()|escape }}</h2>
+            <p class="dashboard-post-meta">{{ item.GetCreated()|date("m/d/Y") }} by <a href="#">{{ item.GetUserId()|escape }}</a></p>
+
+            <p>
+                {{ item.GetBody()|escape }}
+            </p>
+        </div>
+    </div>
+{% endblock %}
