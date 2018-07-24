@@ -26,7 +26,7 @@ class Service
     /** @var DatabaseRepository */
     protected $repository;
 
-    public function __construct(DatabaseRepository $repository, LoggerInterface $logger)
+    public function __construct(RepositoryInterface $repository, LoggerInterface $logger)
     {
         $this->repository = $repository;
         $this->logger = $logger;
@@ -41,15 +41,13 @@ class Service
 
         $items = [];
 
-        $query = "SELECT * FROM item";
-
         $results = $this->repository->getAllItems();
 
         if (empty($results)) {
             return $items;
         }
 
-        $hydrator = new Hydrator();
+        $hydrator = new Hydrator(false, true);
 
         foreach ($results as $result) {
             $items[] = $hydrator->hydrate($result, new Item());
@@ -75,5 +73,13 @@ class Service
         $item = $hydrator->hydrate($data, $item);
 
         return $item;
+    }
+
+    public function create(Item $item)
+    {
+        $hydrator = new Hydrator(true, true);
+        $data = $hydrator->extract($item);
+
+        $this->repository->create($data);
     }
 }

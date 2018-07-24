@@ -18,5 +18,10 @@ return [
             'path' => isset($_ENV['docker']) ? 'php://stdout' : __DIR__ . '/../logs/app.log',
             'level' => \Monolog\Logger::DEBUG,
         ],
+
+        'google' => [
+            'project_id' => getenv("DASHBOARD_PROJECT_ID"),
+            'key_path' => getenv("DASHBOARD_KEY_PATH"),
+        ]
     ],
 ];

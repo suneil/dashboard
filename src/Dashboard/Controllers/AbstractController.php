@@ -4,18 +4,13 @@ declare(strict_types=1);
 namespace Dashboard\Controllers;
 
 use Psr\Container\ContainerInterface;
-use Psr\Http\Message\ResponseInterface;
 use Slim\CallableResolverAwareTrait;
+use Slim\Http\Response;
 use Slim\Views\Twig;
 
 abstract class AbstractController
 {
     use CallableResolverAwareTrait;
-
-    /**
-     * @var ContainerInterface
-     */
-    protected $container;
 
     /** @var Twig */
     protected $view;
@@ -23,16 +18,16 @@ abstract class AbstractController
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
-        $this->view = $this->container->view;
+        $this->view = $this->container->get('view');
     }
 
     /**
-     * @param ResponseInterface $response
+     * @param Response $response
      * @param string $view
      * @param array $data
-     * @return ResponseInterface
+     * @return Response
      */
-    public function render(ResponseInterface $response, string $view, array $data = []): ResponseInterface
+    public function render(Response $response, string $view, array $data = []): Response
     {
         return $this->view->render($response, $view, $data);
     }

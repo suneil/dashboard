@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
 
+use Google\Cloud\Datastore\DatastoreClient;
+
 return [
     'factories' => [
         'db' => function (Psr\Container\ContainerInterface $c) {
@@ -17,6 +19,13 @@ return [
             $db->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
 
             return $db;
+        },
+
+        'datastore' => function(Psr\Container\ContainerInterface $c) {
+            return new DatastoreClient([
+                'projectId' => $c->get('settings')['google']['project_id'],
+                'keyFilePath' => $c->get('settings')['google']['key_path'],
+            ]);
         },
 
         'logger' => function (Psr\Container\ContainerInterface $c) {

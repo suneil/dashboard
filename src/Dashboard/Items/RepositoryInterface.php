@@ -11,4 +11,5 @@ interface RepositoryInterface
 {
     public function getAllItems(): array;
     public function getItem(int $id): array;
+    public function create(array $item): ?int;
 }

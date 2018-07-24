@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace Dashboard\Items;
 
 use DateTime;
+use DateTimeImmutable;
+use DateTimeInterface;
 
 class Item
 {
@@ -27,12 +29,17 @@ class Item
 
     public function __construct()
     {
+        $this->id = null;
+        $this->setCreated(null);
+        $this->setModified(null);
+        $this->setUserId(0);
+        $this->setName('');
     }
 
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -110,12 +117,16 @@ class Item
     }
 
     /**
-     * @param string $created
+     * @param DateTimeInterface $created
      * @return Item
      */
-    public function setCreated(string $created): Item
+    public function setCreated(?DateTimeInterface $created): Item
     {
-        $this->created = date_create($created);
+        if ($created instanceof DateTimeImmutable) {
+            $this->created = new DateTime($created->format(DateTime::ATOM));
+        } elseif ($created == null) {
+            $this->created = new DateTime();
+        }
         return $this;
     }
 
@@ -128,14 +139,17 @@ class Item
     }
 
     /**
-     * @param string $modified
+     * @param DateTimeInterface|null $modified
      * @return Item
      */
-    public function setModified(string $modified): Item
+    public function setModified(?DateTimeInterface $modified): Item
     {
-        $this->modified = date_create($modified);
+        if ($modified instanceof DateTimeImmutable) {
+            $this->modified = new DateTime($modified->format(DateTime::ATOM));
+        } elseif ($modified == null) {
+            $this->modified = new DateTime();
+        }
         return $this;
     }
-
 
 }
