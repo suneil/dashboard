@@ -9,18 +9,6 @@
 * Twig is used for templating instead of PHP as it forces the view code to be concise compared to php and provides safety
 * Zend Hydrator for loading data into the models
 
-### Creating database
+### Database
 
-```mysql
-CREATE DATABASE dashboard;
-CREATE TABLE item
-(
-	id int auto_increment
-		primary key,
-	user_id int not null,
-	name varchar(256) null,
-	body text null,
-	created datetime null,
-	modified datetime null
-);
-```
+Using Google Cloud DataStore. More instructions coming later.
