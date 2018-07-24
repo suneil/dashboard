@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Dashboard\Items;
+namespace Dashboard\Entity;
 
 use Aura\Sql\ExtendedPdo;
-use Dashboard\Items\Service;
+use Dashboard\Entity\Service;
 use PHPUnit\Framework\TestCase;
 use RKA\ZsmSlimContainer\Container;
 

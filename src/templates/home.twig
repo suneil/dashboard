@@ -7,7 +7,7 @@
         <div class="col-md-8 dashboard-main">
             {% for item in items %}
             <div class="dashboard-post">
-                <h2 class="dashboard-post-title"><a href="/item/{{ item.GetId() }}">{{ item.GetName()|escape }}</a></h2>
+                <h2 class="dashboard-post-title"><a href="/entity/{{ item.GetId() }}">{{ item.GetName()|escape }}</a></h2>
                 <p class="dashboard-post-meta">{{ item.GetCreated()|date("m/d/Y") }} by <a href="#">{{ item.GetUserId()|escape }}</a></p>
 
                 <p>

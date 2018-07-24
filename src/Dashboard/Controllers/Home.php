@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace Dashboard\Controllers;
 
-use Dashboard\Items\DatabaseRepository;
-use Dashboard\Items\DataStoreRepository;
-use Dashboard\Items\Service;
+use Dashboard\Entity\DatabaseRepository;
+use Dashboard\Entity\DataStoreRepository;
+use Dashboard\Entity\Service;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 

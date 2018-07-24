@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Dashboard\Items;
+namespace Dashboard\Entity;
 
 use Google\Cloud\Datastore\DatastoreClient;
 use Google\Cloud\Datastore\Query\Query;
@@ -15,7 +15,7 @@ class DataStoreRepository implements RepositoryInterface
     /** @var DatastoreClient */
     protected $client;
 
-    protected $kind = 'Item';
+    protected $kind = 'Entity';
 
     public function __construct(DatastoreClient $client, LoggerInterface $logger)
     {

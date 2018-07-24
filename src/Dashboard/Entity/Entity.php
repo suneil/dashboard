@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace Dashboard\Items;
+namespace Dashboard\Entity;
 
 use DateTime;
 use DateTimeImmutable;
 use DateTimeInterface;
 
-class Item
+class Entity
 {
     /** @var int */
     public $id;
@@ -46,9 +46,9 @@ class Item
 
     /**
      * @param int $id
-     * @return Item
+     * @return Entity
      */
-    public function setId(int $id): Item
+    public function setId(int $id): Entity
     {
         $this->id = $id;
         return $this;
@@ -64,9 +64,9 @@ class Item
 
     /**
      * @param string $name
-     * @return Item
+     * @return Entity
      */
-    public function setName(string $name): Item
+    public function setName(string $name): Entity
     {
         $this->name = $name;
         return $this;
@@ -82,9 +82,9 @@ class Item
 
     /**
      * @param string $body
-     * @return Item
+     * @return Entity
      */
-    public function setBody(string $body): Item
+    public function setBody(string $body): Entity
     {
         $this->body = $body;
         return $this;
@@ -100,9 +100,9 @@ class Item
 
     /**
      * @param int $user_id
-     * @return Item
+     * @return Entity
      */
-    public function setUserId(int $user_id): Item
+    public function setUserId(int $user_id): Entity
     {
         $this->user_id = $user_id;
         return $this;
@@ -118,9 +118,9 @@ class Item
 
     /**
      * @param DateTimeInterface $created
-     * @return Item
+     * @return Entity
      */
-    public function setCreated(?DateTimeInterface $created): Item
+    public function setCreated(?DateTimeInterface $created): Entity
     {
         if ($created instanceof DateTimeImmutable) {
             $this->created = new DateTime($created->format(DateTime::ATOM));
@@ -140,9 +140,9 @@ class Item
 
     /**
      * @param DateTimeInterface|null $modified
-     * @return Item
+     * @return Entity
      */
-    public function setModified(?DateTimeInterface $modified): Item
+    public function setModified(?DateTimeInterface $modified): Entity
     {
         if ($modified instanceof DateTimeImmutable) {
             $this->modified = new DateTime($modified->format(DateTime::ATOM));

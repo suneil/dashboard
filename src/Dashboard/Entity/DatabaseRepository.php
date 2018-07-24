@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Dashboard\Items;
+namespace Dashboard\Entity;
 
 use Aura\Sql\ExtendedPdo;
 use Psr\Log\LoggerInterface;
@@ -11,7 +11,7 @@ use Psr\Log\LoggerInterface;
  *
  * Wraps database access
  *
- * @package Dashboard\Items
+ * @package Dashboard\EntityController
  */
 class DatabaseRepository implements RepositoryInterface
 {

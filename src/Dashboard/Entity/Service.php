@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Dashboard\Items;
+namespace Dashboard\Entity;
 
 use Aura\Sql\ExtendedPdo;
 use Psr\Log\LoggerInterface;
@@ -13,7 +13,7 @@ use Zend\Hydrator\ClassMethods as Hydrator;
  * Abstraction for working with items. Uses repositories as
  * the actual service to work with data
  *
- * @package Dashboard\Items
+ * @package Dashboard\EntityController
  */
 class Service
 {
@@ -50,7 +50,7 @@ class Service
         $hydrator = new Hydrator(false, true);
 
         foreach ($results as $result) {
-            $items[] = $hydrator->hydrate($result, new Item());
+            $items[] = $hydrator->hydrate($result, new Entity());
         }
 
         return $items;
@@ -58,13 +58,13 @@ class Service
 
     /**
      * @param int $id
-     * @return Item|null
+     * @return Entity|null
      */
-    public function getItem(int $id): ?Item
+    public function getItem(int $id): ?Entity
     {
         $this->logger->debug("Getting item: $id");
 
-        $item = new Item();
+        $item = new Entity();
 
         $data = $this->repository->getItem($id);
 
@@ -75,7 +75,7 @@ class Service
         return $item;
     }
 
-    public function create(Item $item)
+    public function create(Entity $item)
     {
         $hydrator = new Hydrator(true, true);
         $data = $hydrator->extract($item);

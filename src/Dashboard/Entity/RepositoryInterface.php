@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Dashboard\Items;
+namespace Dashboard\Entity;
 
 /**
  * Interface RepositoryInterface
- * @package Dashboard\Items
+ * @package Dashboard\EntityController
  */
 interface RepositoryInterface
 {
