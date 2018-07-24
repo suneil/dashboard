@@ -44,6 +44,17 @@ class EntityController extends AbstractController
      * @param array $args
      * @return Response
      */
+    public function new(Request $request, Response $response, array $args): Response
+    {
+        return $this->render($response, 'entity/new.twig');
+    }
+
+    /**
+     * @param Request $request
+     * @param Response $response
+     * @param array $args
+     * @return Response
+     */
     public function create(Request $request, Response $response, array $args): Response
     {
         try {

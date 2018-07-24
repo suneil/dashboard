@@ -1,0 +1,26 @@
+{% extends "base.twig" %}
+
+{% block title %}Item {{ parent() }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-8 dashboard-main">
+            <form action="/entity/create" method="post">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="Enter title">
+                </div>
+                <div class="form-group">
+                    <label for="body">Password</label>
+                    <textarea class="form-control" id="body" placeholder="Enter text"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

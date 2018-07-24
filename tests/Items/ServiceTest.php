@@ -3,8 +3,7 @@ declare(strict_types=1);
 
 namespace Dashboard\Entity;
 
-use Aura\Sql\ExtendedPdo;
-use Dashboard\Entity\Service;
+use Google\Cloud\Datastore\DatastoreClient;
 use PHPUnit\Framework\TestCase;
 use RKA\ZsmSlimContainer\Container;
 
@@ -22,8 +21,8 @@ class ServiceTest extends TestCase
                     return $logger;
                 },
                 // Yeah, this ain't smart but for now...
-                'db' => function ($c) {
-                    return $this->getMockBuilder(ExtendedPdo::class)->disableOriginalConstructor()->getMock();
+                'datastore' => function ($c) {
+                    return $this->getMockBuilder(DatastoreClient::class)->disableOriginalConstructor()->getMock();
                 },
             ],
         ]);
@@ -36,11 +35,11 @@ class ServiceTest extends TestCase
      */
     public function testGetItem()
     {
-        $db = $this->container->get('db');
+        $datastore = $this->container->get('datastore');
         $logger = $this->container->get('logger');
 
-        $repo = $this->getMockBuilder(DatabaseRepository::class)
-            ->setConstructorArgs([$db, $logger])
+        $repo = $this->getMockBuilder(DataStoreRepository::class)
+            ->setConstructorArgs([$datastore, $logger])
             ->getMock();
 
         $repo->method('getItem')
