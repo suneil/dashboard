@@ -8,8 +8,10 @@ declare(strict_types=1);
  * then proceeding up the file
  */
 
+use Dashboard\Middleware\DataStoreAuth;
 use Slim\Http\Request;
 use Slim\Http\Response;
+use Tuupola\Middleware\HttpBasicAuthentication;
 
 //$app->add(new \Slim\Csrf\Guard);
 
@@ -45,3 +47,8 @@ $app->add(function (Request $request, Response $response, callable $next) {
     return $next($request, $response);
 });
 
+$app->add(new HttpBasicAuthentication([
+    "path" => "",
+    "realm" => "Protected",
+    "authenticator" => new DataStoreAuth($app->getContainer()),
+]));
